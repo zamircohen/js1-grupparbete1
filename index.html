@@ -1,0 +1,39 @@
+<!-- Zamir, Matte, Hanna och Kubbe -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Shop</title>
+</head>
+
+<body>
+    <div id="coffeeMenu">
+        <label for="coffeeType">Välj din kaffesort</label>
+        <select name="" id="coffeeType"></select>
+
+        <label for="amountOfCups">Antal</label>
+        <input type="text" id="amountOfCups" value="1">
+
+        <button id="buyBtn">Köp</button>
+
+        <p id="errorMessage"></p>
+        <p id="totalSpent"></p>
+        <p id="membershipStatus"></p>
+    </div>
+
+    <hr>
+
+    <div>
+        <h2 id="transactionHeader">Du har inga transaktioner</h2>
+        <div id="transactions">
+            
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+
+</html>

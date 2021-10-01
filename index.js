@@ -1,23 +1,38 @@
+/*
+Frontend 1 - Javascript // Nackademin // Group task - Coffeeshop
+    
+    @author Mattias Söderberg
+    @author Hanna Tylna  
+    @author Zamir Cohen
+    @author Kubilay Demirkiran
+
+*******************************************************************/
+
+// Creates a constant array named "coffees". The array has 3 objects with the elements "name" and "price" with assigned values.
 const coffees = [
     { name: "Bryggkaffe", price: 20 },
     { name: "Cappucino", price: 30 },
     { name: "Latte", price: 40 },
-    { name: "Chai Latte", price: 50 }
 ]
 
+// Creates a class named "Customer". 
 class Customer {
     constructor() {
-        this.transactions = []
-        this.boughtCups = 0
-        this.silverThreshold = 10
-        this.goldThreshold = 30
-        this.smallDiscountThreshold = 500
-        this.largeDiscountThreshold = 1000
+        this.transactions = []                          // Creates an array which contains the each transaction value
+        this.boughtCups = 0                             // Creates an property within the object to keep track of amount bought cups
+        this.silverThreshold = 10                       // Creates an property with the threshold for Silver membership set to 10
+        this.goldThreshold = 30                         // Creates an property with the threshold for Gold membership set to 30
+        this.smallDiscountThreshold = 500               // Creates an property with the threshold for small discount at 500
+        this.largeDiscountThreshold = 1000              // Creates an property with the threshold for big discount at 1000
     }
+
+    // A method that adds the transactions 
     addTransaction(transactionObject) {
-        this.transactions.push(transactionObject)
-        this.boughtCups += transactionObject.amount
+        this.transactions.push(transactionObject)       // Adds the last made transaction in to the array "transactions"
+        this.boughtCups += transactionObject.amount     
     }
+
+    // A method that calculates total spent 
     getTotalSpent() {
         let sum = 0
         this.transactions.forEach(transaction => {
@@ -25,6 +40,8 @@ class Customer {
         })
         return sum
     }
+
+    // A method that finds and returns the current membershipstatus.
     getMembershipStatus() {
         let status = "Brons"
 
@@ -35,6 +52,8 @@ class Customer {
         }
         return status
     }
+
+    // A method to find if customer is eligible for a discount.
     getDiscount(pricePerCup) {
         let discount = 1
 
@@ -45,23 +64,29 @@ class Customer {
         }
         return discount
     }
+
+    // A method to get the latest transaction from the array "transactions"
     getLatestTransaction() {
         return this.transactions[this.transactions.length - 1]
     }
+
+    // A method that updates the messages on the screen.   
     updateMessage() {
-        const totalSpentParagraph = document.getElementById("totalSpent")
+        const totalSpentParagraph = document.getElementById("totalSpent")                   
         const membershipParagraph = document.getElementById("membershipStatus")
 
         totalSpentParagraph.innerHTML = `Du har handlat för ${this.getTotalSpent()} kr`
         membershipParagraph.innerHTML = `Medlemskapsstatus: ${this.getMembershipStatus()}`
     }
+
+    // A method that creates and updates the transaction messages 
     updateTransactionList() {
         const transactionList = document.getElementById("transactions")
         const transaction = this.getLatestTransaction()
         const header = document.getElementById("transactionHeader")
         header.innerHTML = "Dina transaktioner"
-        //create a paragraph element
-        const paragraph = document.createElement("p")
+        
+        const paragraph = document.createElement("p")                           //create a paragraph element
 
         paragraph.innerHTML = `Du köpte ${transaction.amount} st ${transaction.name} för ${transaction.price} kr styck. Summa: ${transaction.total}`
 
@@ -69,12 +94,14 @@ class Customer {
     }
 }
 
+
+// Creates all the constants that are needed
 const customer = new Customer()
 
 const button = document.getElementById("buyBtn")
-const inputElement = document.getElementById("amountOfCups")
-const selectElement = document.getElementById("coffeeType")
-const errorMessage = document.getElementById("errorMessage")
+const inputElement = document.getElementById("amountOfCups")                    // A constant for the type of coffee chosen by the user
+const selectElement = document.getElementById("coffeeType")                     // A constant for the amount of coffee chosen by the user
+const errorMessage = document.getElementById("errorMessage")                    // A constant with an error message if wrong amount of coffee is chosen by the user
 
 coffees.forEach((coffee, index) => {
     selectElement.options.add(
@@ -82,6 +109,7 @@ coffees.forEach((coffee, index) => {
     )
 })
 
+//Creates an Eventlistener 
 button.addEventListener("click", () => {
     const name = coffees[selectElement.value].name
     const amount = parseInt(inputElement.value)
